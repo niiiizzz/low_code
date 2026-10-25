@@ -1,0 +1,1998 @@
+/*
+ * Author       : nishantgurung.2024.aiml_r808
+ * Generated on : 25-Oct-2026 17:19:25
+ * Version      : 1.0
+ */
+ application "Campus Lost Found System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form claim_requests
+		{
+			displayname = "Claim Requests"
+			success message = "Claim Requests Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			item_type
+			(
+				type = radiobuttons
+				displayname = "Item Type"
+				values = {"Found Item","Lost Item"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			item_reference
+			(
+				type = picklist	
+				displayname = "Item Reference"
+				values  = lost_items.ID
+    			displayformat = [item_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			claimant_name
+			(
+    			type = text
+				displayname = "Claimant Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			claimant_email
+			(
+    			type = email
+				displayname = "Claimant Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			claim_description
+			(
+    			type = textarea
+				displayname = "Claim Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			additional_details
+			(
+    			type = textarea
+				displayname = "Additional Identification Details"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			claim_status
+			(
+				type = picklist
+				displayname = "Claim Status"
+				values = {"Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			admin_remarks
+			(
+    			type = textarea
+				displayname = "Admin Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			submitted_date
+			(
+    			type = datetime
+				displayname = "Submitted Date"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Claim Submitted","Claim Under Review","Claim Rejected","Claim Verified","Claim Pending Information","Claim Approved","Claim Closed"}
+			}
+		}
+		form found_items
+		{
+			displayname = "Found Items"
+			success message = "Items Founded Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			item_name
+			(
+    			type = text
+				displayname = "Item Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			category
+			(
+				type = picklist
+				displayname = "Category"
+				values = {"Accessories","Wallet/Purse","Clothing","ID Card","Keys","Electronics","Books","Other"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			description
+			(
+    			type = textarea
+				displayname = "Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			location_found
+			(
+    			type = text
+				displayname = "Location Found"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			date_found
+			(
+    			type = date
+				displayname = "Date Found"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			finder_name
+			(
+    			type = text
+				displayname = "Finder Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_email
+			(
+    			type = email
+				displayname = "Contact Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			item_image
+			(
+    			type = url
+				displayname = "Item Image"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			status
+			(
+				type = picklist
+				displayname = "Status"
+				values = {"Returned","Claim Pending","Closed","Open"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form lost_items
+		{
+			displayname = "Lost Items"
+			success message = "Items Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			item_name
+			(
+    			type = text
+				displayname = "Item Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			category
+			(
+				type = picklist
+				displayname = "Category"
+				values = {"Accessories","Wallet/Purse","Clothing","ID Card","Keys","Electronics","Books","Other"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			description
+			(
+    			type = textarea
+				displayname = "Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			location_lost
+			(
+    			type = text
+				displayname = "Location Lost"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			date_lost
+			(
+    			type = date
+				displayname = "Date Lost"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			owner_name
+			(
+    			type = text
+				displayname = "Owner Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_email
+			(
+    			type = email
+				displayname = "Contact Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			item_image
+			(
+    			type = url
+				displayname = "Item Image"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			status
+			(
+				type = picklist
+				displayname = "Status"
+				values = {"Returned","Claim Pending","Closed","Open"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Report Created","Under Review","Report Duplicated","Verified","Report Incomplete","Report Closed","Item Found","Searching","Pending Pickup","Item Damaged","Item Returned"}
+			}
+		}
+	}
+	reports
+	{
+		list claim_requests_Report
+		{
+			displayName = "All Claim Requests"
+			show all rows from claim_requests    
+			(
+				item_type as "Item Type"
+				item_reference as "Item Reference"
+				claimant_name as "Claimant Name"
+				claimant_email as "Claimant Email"
+				claim_description as "Claim Description"
+				additional_details as "Additional Identification Details"
+				claim_status as "Claim Status"
+				admin_remarks as "Admin Remarks"
+				submitted_date as "Submitted Date"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (claim_status == "Approved")
+				fields = [claim_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (claim_status == "Rejected")
+				fields = [claim_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban claim_requests_by_claim_status
+		{
+			displayName = "Claim Statuses"
+			show all rows from claim_requests    
+			(
+				item_type as "Item Type"
+				item_reference as "Item Reference"
+				claimant_name as "Claimant Name"
+				claimant_email as "Claimant Email"
+				claim_description as "Claim Description"
+				additional_details as "Additional Identification Details"
+				claim_status as "Claim Status"
+				admin_remarks as "Admin Remarks"
+				submitted_date as "Submitted Date"
+			)
+			options
+			(
+	 			display field = claim_status
+	 		)
+		}
+		list found_items_Report
+		{
+			displayName = "All Items"
+			show all rows from found_items    
+			(
+				item_name as "Item Name"
+				category as "Category"
+				description as "Description"
+				location_found as "Location Found"
+				date_found as "Date Found"
+				finder_name as "Finder Name"
+				contact_email as "Contact Email"
+				item_image as "Item Image"
+				status as "Status"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (status == "Closed")
+				fields = [status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+			)
+		}
+		kanban found_items_by_category
+		{
+			displayName = "Categories"
+			show all rows from found_items    
+			(
+				item_name as "Item Name"
+				category as "Category"
+				description as "Description"
+				location_found as "Location Found"
+				date_found as "Date Found"
+				finder_name as "Finder Name"
+				contact_email as "Contact Email"
+				item_image as "Item Image"
+				status as "Status"
+			)
+			options
+			(
+	 			display field = category
+	 		)
+		}
+		list lost_items_Report
+		{
+			displayName = "All Items"
+			show all rows from lost_items    
+			(
+				item_name as "Item Name"
+				category as "Category"
+				description as "Description"
+				location_lost as "Location Lost"
+				date_lost as "Date Lost"
+				owner_name as "Owner Name"
+				contact_email as "Contact Email"
+				item_image as "Item Image"
+				status as "Status"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (status == "Closed")
+				fields = [status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (status == "Open")
+				fields = [status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (status == "Returned")
+				fields = [status]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban lost_items_by_category
+		{
+			displayName = "Categories"
+			show all rows from lost_items    
+			(
+				item_name as "Item Name"
+				category as "Category"
+				description as "Description"
+				location_lost as "Location Lost"
+				date_lost as "Date Lost"
+				owner_name as "Owner Name"
+				contact_email as "Contact Email"
+				item_image as "Item Image"
+				status as "Status"
+			)
+			options
+			(
+	 			display field = category
+	 		)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#F97164'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '64%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginTop = '8px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'claim_status == &quot;Approved&quot;'\n\t  value = 'thisapp.claim_requests.claim_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '8px' \n\tmarginTop = '0px'\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Count of Approved'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '36%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#C75A50'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-box'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#EEA131'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'claim_status == &quot;Rejected&quot;'\n\t  value = 'thisapp.claim_requests.claim_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Count of Rejected'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#BE8127'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#00CFA9'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'claim_status == &quot;Pending&quot;'\n\t  value = 'thisapp.claim_requests.claim_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Count of Pending'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#0BA385'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#3E99DE'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.claim_requests.claim_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Total Claim Requests'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#0E78C9'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-money-bag'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Grouped_Panel 1'\n \n\t\n\ttitle = 'Status'\n\t\n\t\ttitleSize = '15px'\n            boldTitle = 'true'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#F97164'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'media-1-rotate-left'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tcolor = '#C75A50'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Returned&quot;'\n\t  value = 'thisapp.found_items.status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Returned'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#EEA131'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-hourglass'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#BE8127'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Claim Pending&quot;'\n\t  value = 'thisapp.found_items.status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Claim Pending'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#00CFA9'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'location-route-close'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#0BA385'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Closed&quot;'\n\t  value = 'thisapp.found_items.status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Closed'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#3E99DE'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-box-3d-67'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#0E78C9'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Open&quot;'\n\t  value = 'thisapp.found_items.status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Open'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel_Button 1'\n \n\t\n\ttitle = 'Quick Links'\n\t\n\t\ttitleSize = '15px'\n            boldTitle = 'true'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'claim_requests'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Add New Claim Requests'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='27%'\n   \t>\n\t<panel elementName='Panel_Button 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'found_items'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Add New Found Items'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel_Button 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'lost_items'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Add New Lost Items'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel_Button 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenReport'\n\t\tcomponentLinkName = 'claim_requests_Report'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Show All Claim Requests'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Distribution by Item Reference'\n\t\n\t\ttitleSize = '16px'\n\ttype = 'Bar'\n\txtitle = 'Item Reference'\n\tytitle = 'Count of Item Reference'\n\tbgColor = 'rgb(255, 255, 255)'\n\ttheme = '#f37d16'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'claim_requests'\n\txfield = 'item_reference.item_name'\n\tyfields = 'count:item_reference'\n\tgroupBy = 'item_type'\n\t\tDelugeCriteria = 'item_reference.item_name is not null'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Distribution by Item Type'\n\t\n\t\ttitleSize = '16px'\n\ttype = 'Pie'\n\txtitle = 'Item Type'\n\tytitle = 'Item Type'\n\tbgColor = 'rgb(255, 255, 255)'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'claim_requests'\n\txfield = 'item_type'\n\tyfields = 'count:item_type'\n\tgroupBy = 'item_type'\n\t\tDelugeCriteria = 'item_type is not null &amp;&amp; item_type != &quot;&quot;'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'claim_requests_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			auto_set_lost_status as "Auto-set Lost Item Status"
+			{
+				type =  form
+				form = lost_items
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set status to Open when a new lost item is created
+										if(input.ID == null)
+										{
+											input.status = "Open";
+										}
+						)
+					}
+				}
+
+			}
+			validate_claim_reference as "Validate Claim Reference"
+			{
+				type =  form
+				form = claim_requests
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Validate if item_reference field is present in the claim request
+										if(input.item_reference.isNull())
+										{
+											// Display error message to user
+											alert(item_reference,"Please select an item reference before submitting the claim.");
+											// Cancel the form submission
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			notify_admin_claim_approved as "Notify Admin on Claim Approval"
+			{
+				type =  form
+				form = claim_requests
+
+				record event = on edit
+
+				on user input of claim_status
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if claim_status field is set to Approved
+										if(input.claim_status == "Approved")
+										{
+											// Fetch the claim request record to get claimant details
+											claimRecord = claim_requests[ID == input.ID];
+											// Prepare email subject and message
+											subject = "Claim Request Approved";
+											message = "Dear Admin,\n\n";
+											message = message.concat("The claim request has been approved.\n\n");
+											message = message.concat("Claimant: ").concat(claimRecord.claimant_name).concat("\n");
+											message = message.concat("Email: ").concat(claimRecord.claimant_email).concat("\n\n");
+											message = message.concat("Please review the details in the system.\n\n");
+											message = message.concat("Thank you.");
+											// Send email to admin
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :zoho.adminuserid
+												subject :subject
+												message :message
+											]
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			weekly_lost_items_reminder as "Weekly Lost Items Reminder"
+			{
+				type =  schedule
+					status = inactive
+				start = "2024-05-26 15:53:12"
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Fetch all open lost items
+										openLostItems = lost_items[status == "Open"];
+										// Check if there are any open lost items
+										if(openLostItems.count() > 0)
+										{
+											// Build email message
+											emailBody = "<h2>Weekly Summary of Open Lost Items</h2>";
+											emailBody = emailBody.concat("<p>Dear Lost Item Owners,</p>");
+											emailBody = emailBody.concat("<p>Here is the summary of open lost items reported this week:</p>");
+											emailBody = emailBody.concat("<table border='1' cellpadding='5' cellspacing='0'>");
+											emailBody = emailBody.concat("<tr><th>Item Name</th><th>Category</th><th>Location Lost</th><th>Date Lost</th><th>Contact Email</th></tr>");
+											for each  item in openLostItems
+											{
+												emailBody = emailBody.concat("<tr>");
+												emailBody = emailBody.concat("<td>".concat(item.item_name).concat("</td>"));
+												emailBody = emailBody.concat("<td>".concat(item.category).concat("</td>"));
+												emailBody = emailBody.concat("<td>".concat(item.location_lost).concat("</td>"));
+												// Format date if not null
+												if(item.date_lost.isNull())
+												{
+													dateValue = "N/A";
+												}
+												else
+												{
+													dateValue = item.date_lost.toText("MMM dd, yyyy");
+												}
+												emailBody = emailBody.concat("<td>".concat(dateValue).concat("</td>"));
+												emailBody = emailBody.concat("<td>".concat(item.contact_email).concat("</td>"));
+												emailBody = emailBody.concat("</tr>");
+											}
+											emailBody = emailBody.concat("</table>");
+											emailBody = emailBody.concat("<p>Please contact the respective owners if you find any of these items.</p>");
+											// Send email to all owners
+											ownerEmails = "";
+											for each  item in openLostItems
+											{
+												if(ownerEmails.isEmpty())
+												{
+													ownerEmails = item.contact_email;
+												}
+												else
+												{
+													ownerEmails = ownerEmails.concat(",".concat(item.contact_email));
+												}
+											}
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :ownerEmails
+												subject :"Weekly Summary of Open Lost Items"
+												message :emailBody
+												content type :HTML
+											]
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+		blueprint
+		{
+    			claim_verification_workflow as "Claim Verification Workflow"
+    			{
+        			type = Blueprint
+        			form = claim_requests
+        			start
+        			{
+            			start stage = "Claim Submitted"
+        			}
+        			stages
+        			{
+           			"Claim Submitted"
+           			{
+           			}
+           			"Claim Under Review"
+           			{
+           			}
+           			"Claim Rejected"
+           			{
+           			}
+           			"Claim Verified"
+           			{
+           			}
+           			"Claim Pending Information"
+           			{
+           			}
+           			"Claim Approved"
+           			{
+           			}
+           			"Claim Closed"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+    				approve_claim as "Approve Claim"
+    				{
+         				type = normal
+         				from stage = "Claim Under Review"
+         				to stage = "Claim Verified"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_claim as "Close Claim"
+    				{
+         				type = normal
+         				from stage = "Claim Approved"
+         				to stage = "Claim Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_due_to_inactivity as "Close Due to Inactivity"
+    				{
+         				type = normal
+         				from stage = "Claim Pending Information"
+         				to stage = "Claim Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				finalize_approval as "Finalize Approval"
+    				{
+         				type = normal
+         				from stage = "Claim Verified"
+         				to stage = "Claim Approved"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reject_claim as "Reject Claim"
+    				{
+         				type = normal
+         				from stage = "Claim Submitted"
+         				to stage = "Claim Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reopen_verification as "Reopen for Further Verification"
+    				{
+         				type = normal
+         				from stage = "Claim Verified"
+         				to stage = "Claim Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				request_additional_details as "Request Additional Details"
+    				{
+         				type = normal
+         				from stage = "Claim Under Review"
+         				to stage = "Claim Pending Information"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				resubmit_information as "Resubmit Information"
+    				{
+         				type = normal
+         				from stage = "Claim Pending Information"
+         				to stage = "Claim Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				submit_for_verification as "Submit for Verification"
+    				{
+         				type = normal
+         				from stage = "Claim Submitted"
+         				to stage = "Claim Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+        			}
+    			}
+    			lost_item_recovery_process as "Lost Item Recovery Process"
+    			{
+        			type = Blueprint
+        			form = lost_items
+        			start
+        			{
+            			start stage = "Report Created"
+        			}
+        			stages
+        			{
+           			"Report Created"
+           			{
+           			}
+           			"Under Review"
+           			{
+           			}
+           			"Report Duplicated"
+           			{
+           			}
+           			"Verified"
+           			{
+           			}
+           			"Report Incomplete"
+           			{
+           			}
+           			"Report Closed"
+           			{
+           			}
+           			"Item Found"
+           			{
+           			}
+           			"Searching"
+           			{
+           			}
+           			"Pending Pickup"
+           			{
+           			}
+           			"Item Damaged"
+           			{
+           			}
+           			"Item Returned"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+    				close_case as "Close Case"
+    				{
+         				type = normal
+         				from stage = "Item Returned"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_duplicate as "Close Duplicate Report"
+    				{
+         				type = normal
+         				from stage = "Report Duplicated"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_lack_info as "Close Due to Lack of Info"
+    				{
+         				type = normal
+         				from stage = "Report Incomplete"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_no_match as "Close Report (No Match)"
+    				{
+         				type = normal
+         				from stage = "Verified"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_search as "Close Search (Item Not Found)"
+    				{
+         				type = normal
+         				from stage = "Searching"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_unclaimed as "Close Report (Unclaimed Damaged Item)"
+    				{
+         				type = normal
+         				from stage = "Item Damaged"
+         				to stage = "Report Closed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				confirm_mail_return as "Confirm Mailed Return"
+    				{
+         				type = normal
+         				from stage = "Pending Pickup"
+         				to stage = "Item Returned"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				confirm_pickup as "Confirm Owner Pickup"
+    				{
+         				type = normal
+         				from stage = "Pending Pickup"
+         				to stage = "Item Returned"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				initiate_search as "Initiate Search Process"
+    				{
+         				type = normal
+         				from stage = "Verified"
+         				to stage = "Searching"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				locate_item as "Locate Item"
+    				{
+         				type = normal
+         				from stage = "Searching"
+         				to stage = "Item Found"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				mark_damaged as "Mark Item as Damaged"
+    				{
+         				type = normal
+         				from stage = "Item Found"
+         				to stage = "Item Damaged"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				mark_duplicate as "Mark as Duplicate"
+    				{
+         				type = normal
+         				from stage = "Report Created"
+         				to stage = "Report Duplicated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				mark_found as "Mark Item as Found"
+    				{
+         				type = normal
+         				from stage = "Verified"
+         				to stage = "Item Found"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reject_duplicate as "Reject as Duplicate"
+    				{
+         				type = normal
+         				from stage = "Under Review"
+         				to stage = "Report Duplicated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				request_info as "Request Additional Information"
+    				{
+         				type = normal
+         				from stage = "Under Review"
+         				to stage = "Report Incomplete"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				resubmit_info as "Resubmit Information"
+    				{
+         				type = normal
+         				from stage = "Report Incomplete"
+         				to stage = "Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				secure_damaged as "Secure Damaged Item"
+    				{
+         				type = normal
+         				from stage = "Item Damaged"
+         				to stage = "Pending Pickup"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				secure_item as "Secure Item for Owner"
+    				{
+         				type = normal
+         				from stage = "Item Found"
+         				to stage = "Pending Pickup"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				submit_for_review as "Submit for Review"
+    				{
+         				type = normal
+         				from stage = "Report Created"
+         				to stage = "Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				verify_report as "Verify Report Details"
+    				{
+         				type = normal
+         				from stage = "Under Review"
+         				to stage = "Verified"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "CAM"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form claim_requests
+			{
+				label placement = left
+			}
+			form found_items
+			{
+				label placement = left
+			}
+			form lost_items
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report claim_requests_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_type as "Item Type"
+								item_reference as "Item Reference"
+								claimant_name as "Claimant Name"
+								claimant_email as "Claimant Email"
+								claim_description as "Claim Description"
+								additional_details as "Additional Identification Details"
+								claim_status as "Claim Status"
+								admin_remarks as "Admin Remarks"
+								submitted_date as "Submitted Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								item_type as "Item Type"
+								item_reference as "Item Reference"
+								claimant_name as "Claimant Name"
+								claimant_email as "Claimant Email"
+								claim_description as "Claim Description"
+								additional_details as "Additional Identification Details"
+								claim_status as "Claim Status"
+								admin_remarks as "Admin Remarks"
+								submitted_date as "Submitted Date"
+							)
+						)
+						datablock2
+						(
+		     				title = "Item Reference"
+		     				related field = item_reference
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_lost as "Location Lost"
+								date_lost as "Date Lost"
+								owner_name as "Owner Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report claim_requests_by_claim_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								claimant_name as "Claimant Name"
+								item_type as "Item Type"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_type as "Item Type"
+								item_reference as "Item Reference"
+								claimant_name as "Claimant Name"
+								claimant_email as "Claimant Email"
+								claim_description as "Claim Description"
+								additional_details as "Additional Identification Details"
+								claim_status as "Claim Status"
+								admin_remarks as "Admin Remarks"
+								submitted_date as "Submitted Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report found_items_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_found as "Location Found"
+								date_found as "Date Found"
+								finder_name as "Finder Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_found as "Location Found"
+								date_found as "Date Found"
+								finder_name as "Finder Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report found_items_by_category
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								item_name as "Item Name"
+								location_found as "Location Found"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_found as "Location Found"
+								date_found as "Date Found"
+								finder_name as "Finder Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report lost_items_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_lost as "Location Lost"
+								date_lost as "Date Lost"
+								owner_name as "Owner Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_lost as "Location Lost"
+								date_lost as "Date Lost"
+								owner_name as "Owner Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report lost_items_by_category
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								item_name as "Item Name"
+								location_lost as "Location Lost"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								item_name as "Item Name"
+								category as "Category"
+								description as "Description"
+								location_lost as "Location Lost"
+								date_lost as "Date Lost"
+								owner_name as "Owner Name"
+								contact_email as "Contact Email"
+								item_image as "Item Image"
+								status as "Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Claim Requests"
+					icon = "shopping-cash-register"
+					form  claim_requests
+					{
+						icon = "ui-1-bold-add"
+					}
+					report claim_requests_Report
+					{
+						icon = "travel-world"
+					}
+					report claim_requests_by_claim_status
+					{
+						icon = "health-heartbeat-16"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Items"
+					icon = "design-2-selection"
+					form  found_items
+					{
+						icon = "ui-1-bold-add"
+					}
+					report found_items_Report
+					{
+						icon = "travel-world"
+					}
+					report found_items_by_category
+					{
+						icon = "design-2-selection"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Items"
+					icon = "design-2-selection"
+					form  lost_items
+					{
+						icon = "ui-1-bold-add"
+					}
+					report lost_items_Report
+					{
+						icon = "travel-world"
+					}
+					report lost_items_by_category
+					{
+						icon = "design-2-selection"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			new theme = 4
+			font = "lato"
+			color options
+			{
+				color = "1"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form claim_requests
+			{
+				label placement = auto
+			}
+			form found_items
+			{
+				label placement = auto
+			}
+			form lost_items
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form claim_requests
+			{
+				label placement = auto
+			}
+			form found_items
+			{
+				label placement = auto
+			}
+			form lost_items
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = amethyst
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
